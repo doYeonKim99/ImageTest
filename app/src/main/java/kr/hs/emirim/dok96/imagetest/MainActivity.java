@@ -11,7 +11,7 @@ import android.view.View;
 public class MainActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super햣 .onCreate(savedInstanceState);
         setContentView(new MyImage(getApplicationContext()));
     }
 
