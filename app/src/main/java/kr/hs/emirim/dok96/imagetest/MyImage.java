@@ -7,34 +7,44 @@ import android.graphics.Canvas;
 import android.view.View;
 
 /**
- * Created by appcreator36 on 2016. 9. 26..
+ * Created by appcreator16 on 2016. 9. 26..
  */
-public class MyImage extends View {
-    MyImage(Context context){
-        super(context);
+public class MyImage extends View{
+    int choose=MainActivity.ORIGINAL;
+    Bitmap picture;
 
+    public MyImage(Context context) {
+        super(context);
+        picture= BitmapFactory.decodeResource(getResources(), R.drawable.you);
+    }
+    public void setChoose(int choose)
+    {
+        this.choose=choose;
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        Bitmap picture= BitmapFactory.decodeResource(getResources(),R.drawable.you);
+
         float cx=getWidth()/2.0f;
         float cy=getHeight()/2.0f;
         float x=(getWidth()-picture.getWidth())/2.0f;
         float y=(getHeight()-picture.getHeight())/2.0f;
+        switch (choose)
+        {
+            case MainActivity.ROTATE:
+                canvas.rotate(45,cx,cy); //회전
+                break;
+            case MainActivity.TRANSLATE:
+                canvas.translate(-150,200); //이동
+                break;
+            case MainActivity.SCALE:
+                canvas.scale(1.5f,1.5f,cx,cy); //크기
+                break;
+            case MainActivity.SKEW:
+                canvas.skew(0.4f,0.4f); // 비틀기
+                break;
+        }
         canvas.drawBitmap(picture,x,y,null);
-
-        //회전
-        //canvas.rotate(180,cx,cy);
-        //이동
-        //canvas.translate(-150,200);
-        //크기
-        //canvas.scale(1.5f,1.5f,cx,cy);
-        //비틀기 (축의 이동)
-        canvas.skew(0.4f,0.4f);
-        canvas.drawBitmap(picture,x,y,null);
-
+        //picture.recycle();
     }
 }
-
